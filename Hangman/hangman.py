@@ -6,11 +6,10 @@ def read_file(file_name):
     """
     TODO: Step 1 - open file and read lines as words
     """
-    path = '/home/wtc/problems/submission_001-hangman/short_words.txt'
-    words_file = open(path, 'r')
-    global listvar
-    listvar = words_file.readlines()
-    return [] 
+
+    read_file = open(file_name, 'r')
+    words = read_file.readlines()
+    return words
 
 
 def select_random_word(words):
@@ -18,23 +17,23 @@ def select_random_word(words):
     TODO: Step 2 - select random word from list of file
     """
     i = random.randint(0,20)
-    words = listvar[i]
-    strlen = len(words) - 2
-    x = random.randint(0,strlen)
-    l = words[x]
-    temp = words.replace(l , '_' , 1)
+    word = words[i]
+    strlen = len(word) - 2
+    x = random.randint(0 , strlen)
+    l = word[x]
+    temp = word.replace(l , '_' , 1)
 
-    print(temp)
-    return words
+    print("Guess the word:", temp)
+    return word
 
 
 def get_user_input():
     """
     TODO: Step 3 - get user input for answer
     """
-    user_ans = input("Guess the missing letter:")
+    answer = input("Guess the missing letter: ")
 
-    return 'TODO'
+    return answer
 
 
 def run_game(file_name):
