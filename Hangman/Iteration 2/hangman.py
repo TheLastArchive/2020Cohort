@@ -34,8 +34,12 @@ def ask_file_name():
     """
     TODO Step 2 - Update to prompt user for filename to use for words
     """
-    input("Words file? [leave empty to use short_words.txt] :")
-    return 'TODO.txt'
+    words_file = input("Words file? [leave empty to use short_words.txt] :")
+
+    if (words_file == ""):
+        words_file = "short_words.txt"
+
+    return words_file
 
 
 def run_game(file_name):
