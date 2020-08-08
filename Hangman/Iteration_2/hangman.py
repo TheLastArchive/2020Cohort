@@ -24,7 +24,8 @@ def show_answer(answer, selected_word):
     """
     if (answer == selected_word):
         print("Well done! You are awesome!")
-    else: print("Wrong! Do better next time.") 
+    else: 
+        print("Wrong! Do better next time.") 
 
     pass
 
