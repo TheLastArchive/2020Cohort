@@ -34,7 +34,7 @@ def ask_file_name():
     """
     TODO Step 2 - Update to prompt user for filename to use for words
     """
-    words_file = input("Words file? [leave empty to use short_words.txt] :")
+    words_file = input("Words file? [leave empty to use short_words.txt] : ")
 
     if (words_file == ""):
         words_file = "short_words.txt"
