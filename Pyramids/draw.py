@@ -1,11 +1,11 @@
-
+import math
 
 # TODO: Step 1 - get shape (it can't be blank and must be a valid shape!)
 def get_shape():
 
     shape_param = input("Shape?: ")
 
-    while shape_param.lower() not in ["square", "triangle", "pyramid", "rhombus"]:
+    while shape_param.lower() not in ["square", "triangle", "pyramid", "rhombus", "diamond", "circle"]:
        shape_param = input("Shape?: ")
        
 
@@ -107,7 +107,7 @@ def draw_triangle(height, outline):
 def draw_rhombus(height, outline):
 
     count = 0
-    space_count = height - 1
+    space_count = height -1
 
     if outline == False:
         while count != height:
@@ -124,6 +124,60 @@ def draw_rhombus(height, outline):
             count += 1
         print("*" * height)
 
+def draw_diamond(height, outline):
+
+    count = 0
+    star_count = 1
+    center_row = height
+    space_count2 = 1
+    x = False
+    if height % 2 == 1:
+        height -= 1
+        x = True
+    space_count = (height / 2) 
+
+    if outline == False:
+        while (height / 2 != count):
+            print((" " * int(space_count)) + ("*" * star_count))
+            star_count += 2
+            space_count -= 1
+            count += 1
+        
+        if x == True:
+            print("*" * center_row)
+
+        star_count -= 2
+        space_count += 1
+        
+        while count != 0:
+            print((" " * int(space_count)) + ("*" * star_count))
+            star_count -= 2
+            space_count += 1
+            count -= 1
+
+    else:
+        print(" " * int(space_count) + "*")
+        space_count -= 1
+        count += 1
+        while (height / 2 != count):
+            print((" " * int(space_count)) + "*" + (" " * space_count2) + "*")
+            space_count -= 1
+            space_count2 += 2
+            count += 1
+        if x == True:
+            print("*" + " " * (height - 1) + "*")
+        
+        space_count += 1
+        space_count2 -= 2
+
+        while count != 1:
+            print((" " * int(space_count)) + "*" + (" " * space_count2) + "*")
+            space_count += 1
+            space_count2 -= 2
+            count -= 1
+        print(" " * int(space_count) + "*")
+
+            
 
 # TODO: Steps 2 to 4, 6 - add support for other shapes
 def draw(shape, height, outline):
@@ -136,6 +190,11 @@ def draw(shape, height, outline):
         draw_triangle(height, outline)
     elif (shape == "rhombus"):
         draw_rhombus(height, outline)
+    elif (shape == "diamond"):
+        draw_diamond(height, outline)
+    elif (shape == "circle"):
+        draw_circle(height, outline)
+
     
 
 # TODO: Step 5 - get input from user to draw outline or solid
