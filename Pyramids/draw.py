@@ -5,7 +5,7 @@ def get_shape():
 
     shape_param = input("Shape?: ")
 
-    while shape_param.lower() not in ["square", "triangle", "pyramid", "rhombus", "diamond", "circle"]:
+    while shape_param.lower() not in ["square", "triangle", "pyramid", "rhombus", "diamond", "arrow"]:
        shape_param = input("Shape?: ")
        
 
@@ -177,6 +177,88 @@ def draw_diamond(height, outline):
             count -= 1
         print(" " * int(space_count) + "*")
 
+
+def draw_arrow(height, outline):
+
+    direction = input("Direction? (l/r): ")
+
+    while direction.lower() not in ["l" , "r"]:
+        input("Direction? (l/r): ")
+
+    star_count = 1
+    count = 0
+    space_count = 0
+    if height % 2 == 1:
+        height -= 1
+    
+
+    if outline == False:
+        if direction == "r":
+            while (count != height / 2):
+                print("*" * star_count)
+                star_count += 2
+                count += 1
+
+            print ("*" * star_count)
+            star_count -= 2
+
+            while (count != 0):
+                print("*" * star_count)
+                star_count -= 2
+                count -= 1
+
+        else: #if direction == "l"
+            space_count = height 
+            while count != height / 2:
+                print(" " * int(space_count) + "*" * star_count)
+                star_count += 2
+                space_count -= 2
+                count += 1
+            
+            print("*" * star_count)
+            star_count -= 2
+            space_count += 2
+
+            while count != 0:
+                print(" " * int(space_count) + "*" * star_count)
+                star_count -= 2
+                space_count += 2
+                count -= 1
+
+    else: #if outline == True
+        if direction == "r":
+            while (count != height / 2):
+                print("*" + (" " * space_count) + "*")
+                space_count += 2
+                count += 1
+
+            print("*" + " " * space_count + "*")
+            space_count -= 2
+
+            while (count != 0):
+                print("*" + (" " * space_count) + "*")
+                space_count -= 2
+                count -= 1
+        
+        else: #if direction == "l"
+            space_count2 = height
+            while count != height / 2:
+                print(" " * int(space_count2) + "*" + " " * space_count + "*")
+                star_count += 2
+                space_count2 -= 2
+                space_count += 2
+                count += 1
+
+            print("*" + " " * space_count + "*")
+            space_count -= 2 #outside spaces
+            space_count2 += 2
+
+            while (count != 0):
+                print(" " * space_count2 + "*" + (" " * space_count) + "*")
+                space_count -= 2
+                space_count2 += 2
+                count -= 1
+
             
 
 # TODO: Steps 2 to 4, 6 - add support for other shapes
@@ -192,8 +274,8 @@ def draw(shape, height, outline):
         draw_rhombus(height, outline)
     elif (shape == "diamond"):
         draw_diamond(height, outline)
-    elif (shape == "circle"):
-        draw_circle(height, outline)
+    elif (shape == "arrow"):
+        draw_arrow(height, outline)
 
     
 
