@@ -87,8 +87,8 @@ def do_correct_answer(original_word, answer, guess):
 def do_wrong_answer(word, number_guesses):
 
     if number_guesses == 0:
+        draw_figure(0)
         print("Sorry, you are out of guesses. The word was: " +word)
-        #draw_figure(0)
     else:
         print('Wrong! Number of guesses left: '+str(number_guesses))
         draw_figure(number_guesses)
