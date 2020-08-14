@@ -1,4 +1,5 @@
 import random
+import sys
 
 
 def read_file(file_name):
@@ -136,7 +137,11 @@ def run_game_loop(word, answer):
 
 # TODO: Step 6 - update to get words_file to use from commandline argument
 if __name__ == "__main__":
-    words_file = ask_file_name()
+
+    if len(sys.argv) > 1:
+        words_file = sys.argv[1]
+    else:
+        words_file = ask_file_name()
     words = read_file(words_file)
     selected_word = select_random_word(words)
     current_answer = random_fill_word(selected_word)
