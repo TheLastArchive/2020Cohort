@@ -8,9 +8,7 @@ def get_shape():
     while shape_param.lower() not in ["square", "triangle", "pyramid", "rhombus", "diamond", "arrow"]:
        shape_param = input("Shape?: ")
        
-
     return shape_param.lower()
-
 
 # TODO: Step 1 - get height (it must be int!)
 def get_height():
@@ -24,84 +22,73 @@ def get_height():
 
     return int(height_param)
 
-
 # TODO: Step 2
 def draw_pyramid(height, outline):
 
-    star = "*"
     star_count = 1
-    space = " "
     space_count = height - 1
     count = 0
     space_count2 = 1
 
     if outline == False:
         while (height != count):
-            print((space * space_count) + (star * star_count))
+            print((" " * space_count) + ("*" * star_count))
             star_count += 2
             space_count -= 1
             count += 1
     else:
-        print(space * space_count + star)
+        print(" " * space_count + "*")
         space_count -= 1
         while (height - 2 != count):
-            print((space * space_count) + star + (space * space_count2) + star)
+            print((" " * space_count) + "*" + (" " * space_count2) + "*")
             space_count -= 1
             space_count2 += 2
             count += 1
 
-        print(star * (space_count2 + 2))
-
-
+        print("*" * (space_count2 + 2))
 
 # TODO: Step 3
 def draw_square(height, outline):
 
-    star = "*"
-    space = " "
     count = 0
 
     if outline == False:
         while (count != height):
-            print(star * height)
+            print("*" * height)
             count += 1
 
     else:
         if height == 1:
-            print(star)
+            print("*")
         else:
-            print(star * height)
+            print("*" * height)
             count += 1
             while (count != height - 1):
-             print (star + space * (height - 2) + star)
+             print ("*" + " " * (height - 2) + "*")
              count += 1
-            print (star * height)
-
-
+            print ("*" * height)
 
 # TODO: Step 4
 def draw_triangle(height, outline):
 
-    star = "*"
     star_count = 1
-    space = " "
     space_count = 0
     count = 0
 
     if outline == False:
         while (count != height):
-            print(star * star_count)
+            print("*" * star_count)
             star_count += 1
             count += 1
 
     else:
-        print(star)
+        print("*")
         count += 1
         while (count != height - 1):
-            print(star + (space * space_count) + star)
+            print("*" + (" " * space_count) + "*")
             space_count += 1
             count += 1
-        print(star * height)
+        print("*" * height)
 
 
 def draw_rhombus(height, outline):
@@ -124,11 +111,11 @@ def draw_rhombus(height, outline):
             count += 1
         print("*" * height)
 
+
 def draw_diamond(height, outline):
 
     count = 0
     star_count = 1
-    center_row = height
     space_count2 = 1
     x = False
     if height % 2 == 1:
@@ -144,7 +131,7 @@ def draw_diamond(height, outline):
             count += 1
         
         if x == True:
-            print("*" * center_row)
+            print("*" * height)
 
         star_count -= 2
         space_count += 1
@@ -164,12 +151,9 @@ def draw_diamond(height, outline):
             space_count -= 1
             space_count2 += 2
             count += 1
-        if x == True:
-            print("*" + " " * (height - 1) + "*")
-        
+        if x == True: print("*" + " " * (height - 1) + "*")
         space_count += 1
         space_count2 -= 2
-
         while count != 1:
             print((" " * int(space_count)) + "*" + (" " * space_count2) + "*")
             space_count += 1
@@ -181,7 +165,6 @@ def draw_diamond(height, outline):
 def draw_arrow(height, outline):
 
     direction = input("Direction? (l/r): ")
-
     while direction.lower() not in ["l" , "r"]:
         input("Direction? (l/r): ")
 
@@ -191,7 +174,6 @@ def draw_arrow(height, outline):
     if height % 2 == 1:
         height -= 1
     
-
     if outline == False:
         if direction == "r":
             while (count != height / 2):
@@ -259,8 +241,6 @@ def draw_arrow(height, outline):
                 space_count2 += 2
                 count -= 1
 
-            
-
 # TODO: Steps 2 to 4, 6 - add support for other shapes
 def draw(shape, height, outline):
 
@@ -277,8 +257,6 @@ def draw(shape, height, outline):
     elif (shape == "arrow"):
         draw_arrow(height, outline)
 
-    
-
 # TODO: Step 5 - get input from user to draw outline or solid
 def get_outline():
 
@@ -287,10 +265,8 @@ def get_outline():
     while outline_param not in ["y", "n"]:
         outline_param = input("Outline only? (y/n): ")
 
-    if outline_param == "y":
-        return True
-    else:
-        return False
+    if outline_param == "y": return True
+    else: return False
 
 
 if __name__ == "__main__":
