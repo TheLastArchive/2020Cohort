@@ -6,11 +6,24 @@ def code_generator():
     i = 0
 
     while i < 4:
-        code[i] = random.randint(1, 8)
-        i += 1
+        x = random.randint(1, 8)
+        if x not in code:
+            code[i] = x
+            i += 1
 
     return code
 
+
+def valid_input(user_in):
+
+    if len(user_in) != 4 or user_in.isnumeric() == False: return False
+
+    range_check = ['0', '9']
+    for x in user_in:
+        if x in range_check:
+            return False
+    
+    return True
 
 def input_check(code, user_in):
 
@@ -26,12 +39,15 @@ def input_check(code, user_in):
             place_check += 1
             temp[index] = '_'
         index += 1
-    
+
     for x in user_in:
         if x in temp:
+            index = temp.index(x)
+            temp[index] = '_'
             unit_check += 1
 
     return(place_check, unit_check)
+
 
 def run_game():
     
@@ -41,7 +57,7 @@ def run_game():
     user_in = input("Input 4 digit code: ")
 
     while list(user_in) != code and guesses != 1:
-        if len(user_in) != 4 or user_in.isnumeric == False:
+        if valid_input(user_in) == False:
             print("Please enter exactly 4 digits.")
             user_in = input("Input 4 digit code: ")
         else:
