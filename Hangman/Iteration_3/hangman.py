@@ -24,45 +24,35 @@ def select_random_word(words):
     return word
 
 
-# TODO: Step 1 - update to randomly fill in one character of the word only
 def random_fill_word(word):
 
     x = random.randint(0, len(word) - 1)
-    dupe_check = word[x]
     temp = list(word)
     i = 0
     
     while i <= len(word) - 1:
-        if i == x or dupe_check == temp[i]:
-           i+= 1
-        else:
+        if i != x and word[x] != temp[i]:
             temp[i] = '_'
-            i += 1
+            print(temp) #test print
+        i += 1
 
     return "".join(temp)
 
 
-
-
-# TODO: Step 1 - update to check if character is one of the missing characters
 def is_missing_char(original_word, answer_word, char):
 
     i = 0
     temp1 = list(original_word)
     temp2 = list(answer_word)
 
-    if char in temp2:
-        return False
+    if char in temp2: return False
 
     while i <= len(original_word) - 1:
-        if char == temp1[i]:
-            return True
-        else:
-            i += 1
+        if char == temp1[i]: return True
+        i += 1
     return False
 
 
-# TODO: Step 1 - fill in missing char in word and return new more complete word
 def fill_in_char(original_word, answer_word, char):
 
     temp1 = list(original_word)
@@ -84,7 +74,6 @@ def do_correct_answer(original_word, answer, guess):
     return answer
 
 
-# TODO: Step 4: update to use number of remaining guesses
 def do_wrong_answer(word, number_guesses):
 
     if number_guesses == 0:
@@ -95,7 +84,6 @@ def do_wrong_answer(word, number_guesses):
         draw_figure(number_guesses)
 
 
-# TODO: Step 5: draw hangman stick figure, based on number of guesses remaining
 def draw_figure(number_guesses):
     
     four_left = "/----\n|\n|\n|\n|\n_______" 
@@ -115,9 +103,7 @@ def draw_figure(number_guesses):
     else:
         print(dead)
 
-# TODO: Step 2 - update to loop over getting input and checking until whole word guessed
-# TODO: Step 3 - update loop to exit game if user types `exit` or `quit`
-# TODO: Step 4 - keep track of number of remaining guesses
+
 def run_game_loop(word, answer):
 
     print("Guess the word: "+answer)
@@ -134,8 +120,6 @@ def run_game_loop(word, answer):
             do_wrong_answer(word, number_guesses)
             
 
-
-# TODO: Step 6 - update to get words_file to use from commandline argument
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:

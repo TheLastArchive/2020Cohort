@@ -1,5 +1,6 @@
 import random
 
+
 def code_generator():
 
     code = [0, 0, 0, 0]
@@ -33,10 +34,12 @@ def input_check(code, user_in):
 
     return(place_check, unit_check)
 
+
 def run_game():
     
     code = code_generator()
     guesses = 12
+    print(code)
     print("4-digit Code has been set. Digits in range 1 to 8. You have 12 turns to break it.")
     user_in = input("Input 4 digit code: ")
 
