@@ -26,14 +26,13 @@ def select_random_word(words):
 
 def random_fill_word(word):
 
-    x = random.randint(0, len(word) - 1)
+    random_index = random.randint(0, len(word) - 1)
     temp = list(word)
     i = 0
     
     while i <= len(word) - 1:
-        if i != x and word[x] != temp[i]:
-            temp[i] = '_'
-            print(temp) #test print
+        if i != random_index and word[random_index] != temp[i]:
+            temp[i] = "_"
         i += 1
 
     return "".join(temp)
@@ -60,11 +59,10 @@ def fill_in_char(original_word, answer_word, char):
     i = 0
 
     while i <= (len(original_word) -1): #running the while loop through the entire word allows for
-        if char == temp1[i]:            #duplicate letters to be added.
+        if char == temp1[i]:            #duplicate letters to be revealed
             temp2[i] = char
-            i += 1
-        else:
-            i += 1
+        i += 1
+        
     return "".join(temp2) #returns answer_word with new character
 
 
@@ -74,7 +72,7 @@ def do_correct_answer(original_word, answer, guess):
     return answer
 
 
-def do_wrong_answer(word, number_guesses):
+def do_wrong_answer(word, number_guesses, answer):
 
     if number_guesses == 0:
         draw_figure(0)
@@ -82,26 +80,27 @@ def do_wrong_answer(word, number_guesses):
     else:
         print('Wrong! Number of guesses left: '+str(number_guesses))
         draw_figure(number_guesses)
+        print(answer)
 
 
 def draw_figure(number_guesses):
     
-    four_left = "/----\n|\n|\n|\n|\n_______" 
-    three_left = "/----\n|   0\n|\n|\n|\n_______"
-    two_left = "/----\n|   0\n|  /|\ \n|\n|\n_______"
-    one_left = "/----\n|   0\n|  /|\ \n|   |\n|\n_______"
-    dead = '/----\n|   0\n|  /|\\\n|   |\n|  / \\\n_______'
-
     if number_guesses == 4:
-        print(four_left)
+        print("/----\n|\n|\n|\n|\n_______")
     elif number_guesses == 3:
-        print(three_left)
+        print("/----\n|   O\n|\n|\n|\n_______")
     elif number_guesses == 2:
-        print(two_left)
+        print("/----\n|   O\n|  /|\ \n|\n|\n_______")
     elif number_guesses == 1:
-        print(one_left)
+        print("/----\n|   O\n|  /|\ \n|   |\n|\n_______")
     else:
-        print(dead)
+        print("/----\n|   O\n|  /|\\\n|   |\n|  / \\\n_______")
+    
+
+def win(word, number_guesses):
+
+    print("Congratulations!")
+    print(" \O/\n  | \n  |\n / \ ")
 
 
 def run_game_loop(word, answer):
@@ -117,18 +116,17 @@ def run_game_loop(word, answer):
             answer = do_correct_answer(word, answer, guess)
         else:
             number_guesses -= 1
-            do_wrong_answer(word, number_guesses)
+            do_wrong_answer(word, number_guesses, answer)
+    if word == answer: win(word, number_guesses)
             
 
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:
         words_file = sys.argv[1]
-    else:
-        words_file = ask_file_name()
+    else: words_file = ask_file_name()
+
     words = read_file(words_file)
     selected_word = select_random_word(words)
     current_answer = random_fill_word(selected_word)
-
     run_game_loop(selected_word, current_answer)
-
