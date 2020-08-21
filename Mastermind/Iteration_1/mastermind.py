@@ -1,10 +1,5 @@
 import random
 
-<<<<<<< HEAD
-
-def code_generator():
-=======
->>>>>>> d207b2f362bc5be2208518b1b5ce4f92bfb8bde5
 
 def run_game():
     
@@ -18,13 +13,6 @@ def run_game():
             index += 1
     code = "".join(map(str, code))
 
-<<<<<<< HEAD
-
-def run_game():
-    
-    code = code_generator()
-=======
->>>>>>> d207b2f362bc5be2208518b1b5ce4f92bfb8bde5
     guesses = 12
     print(code)
     print("4-digit Code has been set. Digits in range 1 to 8. You have 12 turns to break it.")

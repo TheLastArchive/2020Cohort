@@ -24,7 +24,7 @@ def valid_input(user_in):
         
     return True
 
-def input_check(code, user_in):
+def code_compare(code, user_in):
 
     code = list(code)
     temp = code
@@ -54,12 +54,12 @@ def run_game():
     print("4-digit Code has been set. Digits in range 1 to 8. You have 12 turns to break it.")
     user_in = input("Input 4 digit code: ")
 
-    while list(user_in) != code and guesses != 1:
+    while guesses != 1:
         if valid_input(user_in) == False:
             print("Please enter exactly 4 digits.")
             user_in = input("Input 4 digit code: ")
         else:
-            place_check, unit_check = input_check(code, user_in)
+            place_check, unit_check = code_compare(code, user_in)
             print("Number of correct digits in correct place:    " , place_check)
             print("Number of correct digits not in correct place:" , unit_check)
             if place_check == 4:
