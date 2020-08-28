@@ -27,6 +27,14 @@ def show_results(correct_digits_only, correct_digits_and_position):
     print('Number of correct digits in correct place:     ' + str(correct_digits_and_position))
     print('Number of correct digits not in correct place: ' + str(correct_digits_only))
 
+def get_answer_input():
+
+    answer = input("Input 4 digit code: ")
+    while len(answer) < 4 or len(answer) > 4:
+        print("Please enter exactly 4 digits.")
+        answer = input("Input 4 digit code: ")
+
+    return answer
 
 def take_turn(code):
     """Handle the logic of taking a turn, which includes:
@@ -34,12 +42,7 @@ def take_turn(code):
        * check if answer is valid
        * check correctness of answer
     """
-
-    answer = input("Input 4 digit code: ")
-    while len(answer) < 4 or len(answer) > 4:
-        print("Please enter exactly 4 digits.")
-        answer = input("Input 4 digit code: ")
-
+    answer = get_answer_input()
     correct_digits_and_position = 0
     correct_digits_only = 0
     for i in range(len(answer)):
@@ -60,7 +63,11 @@ def show_code(code):
 
 
 def check_correctness(turns, correct_digits_and_position):
-    """Checks correctness of answer and show output to user"""
+    """Checks correctness of answer and show output to user
+
+    Removing the 'correct' boolean and simply returning a True or False
+    in this function and breaking the loop in run_game() accordingly 
+    saves a variable, a constraint and is a lot easier to manage"""
 
     if correct_digits_and_position == 4:
         print('Congratulations! You are a codebreaker!')
@@ -75,7 +82,6 @@ def run_game():
 
     code = create_code()
     show_instructions()
-
     turns = 0
     while turns < 12:
         correct_digits_and_position = take_turn(code)
