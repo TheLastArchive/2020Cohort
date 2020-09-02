@@ -24,6 +24,13 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(super_algos.sum_all([]), -1)
         self.assertEqual(super_algos.sum_all([25, 5, 7, 3, 9, 12]), 61)
 
-        
+    def test_find_possible_strings(self):
+        sys.stdout = io.StringIO()
+        self.assertEqual(super_algos.find_possible_strings([1,2,3,4], 5), [])
+        self.assertEqual(super_algos.find_possible_strings([], 1), [])
+        self.assertEqual(super_algos.find_possible_strings(["a", "b"], 1), ["a", "b"])
+        self.assertEqual(super_algos.find_possible_strings(["a", "b"], 2), ["aa", "ab", "ba", "bb"])
+
+
 if __name__ == '__main__':
     unittest.main()
