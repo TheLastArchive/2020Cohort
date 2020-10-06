@@ -1,3 +1,4 @@
+from world import obstacles
 
 def safe_zone(robot_data):
 
@@ -54,6 +55,7 @@ def turn_right(robot_data, silence):
 
 
 def sprint(robot_data, magnitude, silence):
+    """Recursive function that handles the sprint command"""
 
     if magnitude == 0:
         if silence < 2: print(" > {} now at position ({},{}).".format(robot_data['name'], robot_data['x'], robot_data['y']))
@@ -68,15 +70,31 @@ def track_position(robot_data, magnitude):
     """Calculates and keeps track of the robots position"""
 
     compass = robot_data['compass']
+    temp_x = robot_data.get('x')  #stores the initial position
+    temp_y = robot_data.get('y')
 
     if compass[0] % 2 == 1:   #Checks if the direction is 'odd' (along the y-axis)
-        robot_data['y'] += (compass[0] * magnitude)
-        if abs(robot_data['y']) > 200:
+        robot_data['y'] += int((compass[0] * magnitude))
+
+        if obstacles.is_position_blocked(robot_data['x'], robot_data['y']) == True or\
+            obstacles.is_path_blocked(temp_x, temp_y, robot_data['x'], robot_data['y']) == True:   #path checks
+                robot_data['y'] -= (compass[0] * magnitude)
+                print(f"> {robot_data['name']}: Sorry, there is an obstacle in the way.")
+                return False
+
+        if abs(robot_data['y']) > 200:  #checking if the robot has gone out of bounds
             safe_zone(robot_data)
-            robot_data['y'] -= (compass[0] * magnitude)
+            robot_data['y'] -= int((compass[0] * magnitude))
             return False
     else:
         robot_data['x'] += (int((compass[0] / 2))  * magnitude)
+
+        if obstacles.is_position_blocked(robot_data['x'], robot_data['y']) == True or\
+            obstacles.is_path_blocked(temp_x, temp_y, robot_data['x'], robot_data['y']) == True:
+                robot_data['x'] -= (int((compass[0] / 2))  * magnitude)
+                print(f"> {robot_data['name']}: Sorry, there is an obstacle in the way.")
+                return False
+
         if abs(robot_data['x']) > 100:
             safe_zone(robot_data)
             robot_data['x'] -= (int((compass[0] / 2))  * magnitude)
@@ -86,6 +104,7 @@ def track_position(robot_data, magnitude):
 
 
 def replay_output(robot_data, commands, count):
+    """Handles the print output for the replay command"""
 
     reversePrint = ""
     silencePrint = ""
@@ -97,4 +116,13 @@ def replay_output(robot_data, commands, count):
         silencePrint = " silently"
 
     print(f" > {robot_data['name']} replayed " + str(count) + " commands" + reversePrint + silencePrint + ".")
-    print(f" > {robot_data['name']} now at position ({robot_data['x']}, {robot_data['y']}).")
+    print(f" > {robot_data['name']} now at position ({robot_data['x']},{robot_data['y']}).")
+
+
+def display_obstacles(obstacle_list):
+    """Resets the obstacle list since it's a global variable and interferes with the tests"""
+
+    if obstacles.get_obstacles() != []:
+        print("There are some obstacles:")
+        for i in obstacle_list:
+            print(f"- At position {i[0]},{i[1]} (to {i[2]},{i[3]})")

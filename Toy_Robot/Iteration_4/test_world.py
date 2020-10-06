@@ -1,4 +1,5 @@
 from world.text import world
+from world import obstacles
 import unittest
 import io
 import sys
@@ -18,7 +19,7 @@ class TestFunction(unittest.TestCase):
     def test_track_position(self):
         sys.stdout = io.StringIO()
         robot_data = {'name': "", 'x': 0, 'y': 0, 'compass': [1, 2, -1, -2], 'power': True, 'movements': []}
-
+        obstacles.obstacle_list = [[100, 200, 104, 204]]
         self.assertEqual(world.track_position(robot_data, 10), {'name': "", 'x': 0, 'y': 10, 'compass': [1, 2, -1, -2], 'power': True, 'movements': []})
         robot_data['y'] = 0   #It kept saving the y value between tests and this was the easiest fix
         self.assertEqual(world.track_position(robot_data, 15), {'name': "", 'x': 0, 'y': 15, 'compass': [1, 2, -1, -2], 'power': True, 'movements': []})

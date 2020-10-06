@@ -1,18 +1,41 @@
-from world import obstacles
-import unittest
-import io
+import unittest 
 import sys
+import io
+from world import obstacles
 
-class TestFunction(unittest.TestCase):
+
+class MyTestCase(unittest.TestCase):
 
     def test_is_position_blocked(self):
-        #the_obstacles = [(-43, 134, -39, 138), (-1, 105, 3, 109), (-7, -82, -3, -78), (77, -88, 81, -84)]
 
-        self.assertFalse(obstacles.is_position_blocked(-41, 136))
-        self.assertFalse(obstacles.is_position_blocked(-9, -82))
-        self.assertFalse(obstacles.is_position_blocked(-41, 139))
-        self.assertFalse(obstacles.is_position_blocked(-50, 137))
+        obstacles.obstacle_list = [[0, 0, 4, 4]]
 
+        self.assertTrue(obstacles.is_position_blocked(0, 0))
+        self.assertTrue(obstacles.is_position_blocked(2, 3))
+
+        self.assertFalse(obstacles.is_position_blocked(6, 6))
+        self.assertFalse(obstacles.is_position_blocked(2, 6))
+
+
+    def test_is_path_blocked(self):
+
+        obstacles.obstacle_list = [[0, 0, 4, 4]]
+
+        self.assertTrue(obstacles.is_path_blocked(0, 0, 0, 0))
+        self.assertTrue(obstacles.is_path_blocked(0, 0, 2, 0))
+        self.assertTrue(obstacles.is_path_blocked(8, 2, -4, 2))
+        self.assertTrue(obstacles.is_path_blocked(0, -4, 0, 8))
+
+        self.assertFalse(obstacles.is_path_blocked(5, -4, 5, 8))
+        self.assertFalse(obstacles.is_path_blocked(0, -1, 20, -1))
+
+    def test_get_obstacles(self):
+
+        obstacles.obstacle_list = [[0, 0, 4, 4]]
+
+        self.assertEqual(obstacles.get_obstacles(), obstacles.obstacle_list)
+        
 
 if __name__ == '__main__':
     unittest.main()
+

@@ -1,12 +1,22 @@
 import re
 import sys
+from world import obstacles
+
+if len(sys.argv) > 1 and sys.argv[1] == 'turtle':
+    from world.turtle import world
+else:
+    from world.text import world
+
 
 def robot_start():
     """This is the entry function, do not change"""
 
     robot_data = {'name': "", 'x': 0, 'y': 0, 'compass': [1, 2, -1, -2], 'power': True, 'movements': []}
-
+    
+    obstacles.create_obstacles()
     robot_data['name'] = name_robot()
+    obstacle_list = obstacles.get_obstacles()
+    world.display_obstacles(obstacle_list)
     check_command(robot_data)
     pass
 
@@ -30,6 +40,7 @@ def shut_down(robot_data, ignore_me):
 
     print("{}: Shutting down..".format(robot_data['name']))
     robot_data['power'] = False
+    obstacles.reset_obstacles() #to reset the obstacle list because they want us to use global variables :)
 
     return robot_data
     
@@ -137,14 +148,5 @@ def check_command(robot_data):
     
 if __name__ == '__main__':
 
-    if len(sys.argv) == 1:
-        print("Invalid argument")
-    elif sys.argv[1] == 'text': 
-        from world.text import world
-        robot_start()
-    elif sys.argv[1] == 'turtle':
-        from world.turtle import world
-        robot_start()
-    else:
-        print("Invalid argument")
+    robot_start()
     
