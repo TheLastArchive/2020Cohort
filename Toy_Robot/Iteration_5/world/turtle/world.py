@@ -35,7 +35,7 @@ def move_forward(robot_data, magnitude, silence):
     output and 2 is complete silence where no output is printed"""
 
     Jeff.penup()
-    if track_position(robot_data, magnitude): Jeff.forward(int(magnitude))
+    if track_position(robot_data, int(magnitude)): Jeff.forward(int(magnitude))
 
     return robot_data
 
@@ -44,7 +44,7 @@ def move_back(robot_data, magnitude, silence):
     """Moves the robot backwards"""
 
     Jeff.penup()
-    if track_position(robot_data, magnitude * -1): Jeff.back(int(magnitude))
+    if track_position(robot_data, int(magnitude) * -1): Jeff.back(int(magnitude))
     
     return robot_data
 
@@ -83,13 +83,12 @@ def track_position(robot_data, magnitude):
     compass = robot_data['compass']
     temp_x = robot_data.get('x')  #stores the initial position
     temp_y = robot_data.get('y')
-
     if compass[0] % 2 == 1:   #Checks if the direction is 'odd' (along the y-axis)
-        robot_data['y'] += int((compass[0] * magnitude))
+        robot_data['y'] += (int(compass[0]) * magnitude)
 
         if obstacles.is_position_blocked(robot_data['x'], robot_data['y']) == True or\
             obstacles.is_path_blocked(temp_x, temp_y, robot_data['x'], robot_data['y']) == True:   #path checks
-                robot_data['y'] -= (compass[0] * magnitude)
+                robot_data['y'] -= (int(compass[0]) * magnitude)
                 print(f"> {robot_data['name']}: Sorry, there is an obstacle in the way.")
                 return False
 
@@ -98,7 +97,7 @@ def track_position(robot_data, magnitude):
             robot_data['y'] -= int((compass[0] * magnitude))
             return False
     else:
-        robot_data['x'] += (int((compass[0] / 2))  * magnitude)
+        robot_data['x'] += int(float(compass[0] / 2))  * magnitude
 
         if obstacles.is_position_blocked(robot_data['x'], robot_data['y']) == True or\
             obstacles.is_path_blocked(temp_x, temp_y, robot_data['x'], robot_data['y']) == True:
@@ -144,3 +143,4 @@ def display_obstacles(obstacle_list):
         Jeff.penup()
     Jeff.penup()
     Jeff.goto(0,0)
+

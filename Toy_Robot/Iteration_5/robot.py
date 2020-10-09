@@ -1,11 +1,25 @@
 import re
 import sys
-from maze import obstacles
+from importlib import import_module
 
-if len(sys.argv) > 1 and sys.argv[1] == 'turtle':
-    from world.turtle import world
+if len(sys.argv) == 2:
+    if sys.argv[1].lower() == 'turtle': 
+        from world.turtle import world
+    else: from world.text import world
+    from maze import obstacles
+
+elif len(sys.argv) == 3:
+    if sys.argv[1].lower == 'turtle': 
+        from world.turtle import world
+    else: from world.text import world
+    try: import_module('maze.' + sys.argv[2])
+    except ImportError:
+        print("No module named: " + sys.argv[2])
+        exit()
+
 else:
     from world.text import world
+    from maze import obstacles
 
 
 def robot_start():
@@ -13,18 +27,18 @@ def robot_start():
 
     robot_data = {'name': "", 'x': 0, 'y': 0, 'compass': [1, 2, -1, -2], 'power': True, 'movements': []}
     
-    obstacles.create_obstacles()
     robot_data['name'] = name_robot()
-    obstacle_list = obstacles.get_obstacles()
+    obstacle_list = maze.create_obstacles
     world.display_obstacles(obstacle_list)
     check_command(robot_data)
     pass
+
 
 def name_robot():
     """Names the robot"""
 
     name = input("What do you want to name your robot? ")
-    print("{}: Hello kiddo!".format(name))
+    print(f"{name}: Hello kiddo!")
 
     return name
 
@@ -32,7 +46,7 @@ def name_robot():
 def error(robot_data, command):
     """Displays an error message upon an invalid command"""
 
-    print("{}: Sorry, I did not understand '{}'.".format(robot_data['name'], command))
+    print(f"{robot_data['name']}: Sorry, I did not understand '{command}'.")
 
 
 def shut_down(robot_data, ignore_me):
@@ -130,7 +144,7 @@ def check_command(robot_data):
         command = input(f"{robot_data['name']}: What must I do next? ")
         while command == "":
             command = input(f"{robot_data['name']}: What must I do next? ")
-        command = command.split()
+        command = command.split()      #Splits command into a list of strings to be easily managed
         if command[0].lower() in noparam_commands:      
             robot_data = noparam_commands.get(command[0].lower())(robot_data, 0)
             save_command(robot_data, " ".join(command))
