@@ -1,6 +1,7 @@
 import turtle
 from world import obstacles
 
+
 Jeff = turtle.Turtle()
 Jeff.color("red")
 Jeff.speed(10)     #This sets up the grid
@@ -23,6 +24,7 @@ Jeff.penup()
 Jeff.back(200)
 Jeff.pendown()
 Jeff.speed(1)
+
 
 
 def safe_zone(robot_data):
