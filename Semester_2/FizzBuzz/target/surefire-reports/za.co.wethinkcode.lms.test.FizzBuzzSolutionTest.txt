@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: za.co.wethinkcode.lms.test.FizzBuzzSolutionTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! - in za.co.wethinkcode.lms.test.FizzBuzzSolutionTest
+generateUpTo15  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <[1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz]> but was: <null>
+	at za.co.wethinkcode.lms.test.FizzBuzzSolutionTest.generateUpTo15(FizzBuzzSolutionTest.java:42)
+
+divisibleBy3  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Fizz> but was: <>
+	at za.co.wethinkcode.lms.test.FizzBuzzSolutionTest.divisibleBy3(FizzBuzzSolutionTest.java:22)
+
+divisibleBy5  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Buzz> but was: <>
+	at za.co.wethinkcode.lms.test.FizzBuzzSolutionTest.divisibleBy5(FizzBuzzSolutionTest.java:29)
+
+divisibleBy3And5  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <FizzBuzz> but was: <>
+	at za.co.wethinkcode.lms.test.FizzBuzzSolutionTest.divisibleBy3And5(FizzBuzzSolutionTest.java:35)
+
+notDivisibleBy3or5  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <13> but was: <>
+	at za.co.wethinkcode.lms.test.FizzBuzzSolutionTest.notDivisibleBy3or5(FizzBuzzSolutionTest.java:14)
+

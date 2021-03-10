@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="za.co.wethinkcode.lms.test.StudentTest" time="0.058" tests="1" errors="0" skipped="0" failures="1">
+  <properties>
+    <property name="sun.desktop" value="gnome"/>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/home/alex/problems/submission_001-fizzbuzz/target/test-classes:/home/alex/problems/submission_001-fizzbuzz/target/classes:/home/alex/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.3/junit-jupiter-engine-5.6.3.jar:/home/alex/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/alex/.m2/repository/org/junit/platform/junit-platform-engine/1.6.3/junit-platform-engine-1.6.3.jar:/home/alex/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/alex/.m2/repository/org/junit/platform/junit-platform-commons/1.6.3/junit-platform-commons-1.6.3.jar:/home/alex/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.3/junit-jupiter-api-5.6.3.jar:/home/alex/.m2/repository/org/junit/platform/junit-platform-launcher/1.6.3/junit-platform-launcher-1.6.3.jar:"/>
+    <property name="java.vm.vendor" value="Ubuntu"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://ubuntu.com/"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="ZA"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-amd64/lib"/>
+    <property name="sun.java.command" value="/home/alex/problems/submission_001-fizzbuzz/target/surefire/surefirebooter14353706271250702391.jar /home/alex/problems/submission_001-fizzbuzz/target/surefire 2021-02-11T10-11-04_346-jvmRun1 surefire13250192257914349088tmp surefire_02442378737178114250tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/home/alex/problems/submission_001-fizzbuzz/target/test-classes:/home/alex/problems/submission_001-fizzbuzz/target/classes:/home/alex/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.3/junit-jupiter-engine-5.6.3.jar:/home/alex/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/alex/.m2/repository/org/junit/platform/junit-platform-engine/1.6.3/junit-platform-engine-1.6.3.jar:/home/alex/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/alex/.m2/repository/org/junit/platform/junit-platform-commons/1.6.3/junit-platform-commons-1.6.3.jar:/home/alex/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.3/junit-jupiter-api-5.6.3.jar:/home/alex/.m2/repository/org/junit/platform/junit-platform-launcher/1.6.3/junit-platform-launcher-1.6.3.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/alex"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2021-01-19"/>
+    <property name="java.home" value="/usr/lib/jvm/java-11-openjdk-amd64"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/alex/problems/submission_001-fizzbuzz"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="/home/alex/problems/submission_001-fizzbuzz/target/surefire/surefirebooter14353706271250702391.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="11.0.10+9-Ubuntu-0ubuntu1.20.04"/>
+    <property name="user.name" value="alex"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="5.4.0-58-generic"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/alex/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-lts"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="11.0.10"/>
+    <property name="user.dir" value="/home/alex/problems/submission_001-fizzbuzz"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Ubuntu"/>
+    <property name="java.vm.version" value="11.0.10+9-Ubuntu-0ubuntu1.20.04"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="55.0"/>
+  </properties>
+  <testcase name="studentTests" classname="za.co.wethinkcode.lms.test.StudentTest" time="0.054">
+    <failure message="Expected that there are no test failures. ==&gt; expected: &lt;0&gt; but was: &lt;2&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Expected that there are no test failures. ==> expected: <0> but was: <2>
+	at za.co.wethinkcode.lms.test.StudentTest.studentTests(StudentTest.java:33)
+]]></failure>
+    <system-out><![CDATA[
+Test run finished after 25 ms
+[         2 containers found      ]
+[         0 containers skipped    ]
+[         2 containers started    ]
+[         0 containers aborted    ]
+[         2 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         3 tests successful      ]
+[         2 tests failed          ]
+
+
+Failures (2):
+  JUnit Jupiter:FizzBuzzTest:generateUpTo15()
+    MethodSource [className = 'za.co.wethinkcode.fizzbuzz.FizzBuzzTest', methodName = 'generateUpTo15', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <[1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz]> but was: <null>
+       org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+       org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+       za.co.wethinkcode.fizzbuzz.FizzBuzzTest.generateUpTo15(FizzBuzzTest.java:34)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:566)
+       [...]
+  JUnit Jupiter:FizzBuzzTest:notDivisibleBy3or5()
+    MethodSource [className = 'za.co.wethinkcode.fizzbuzz.FizzBuzzTest', methodName = 'notDivisibleBy3or5', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <13> but was: <>
+       org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+       org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+       za.co.wethinkcode.fizzbuzz.FizzBuzzTest.notDivisibleBy3or5(FizzBuzzTest.java:13)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:566)
+       [...]
+]]></system-out>
+  </testcase>
+</testsuite>
