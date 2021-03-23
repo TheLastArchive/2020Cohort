@@ -1,9 +1,9 @@
 import turtle
-from maze import obstacles
+# from robot import obstacles
 
 Jeff = turtle.Turtle()
 Jeff.color("red")
-Jeff.speed(10)     #This sets up the grid
+Jeff._tracer(0, 0)     #This sets up the grid
 Jeff.left(90)
 Jeff.penup()
 Jeff.forward(200)
@@ -23,6 +23,7 @@ Jeff.penup()
 Jeff.back(200)
 Jeff.pendown()
 Jeff.speed(1)
+Jeff._tracer(1, 1)
 
 
 def safe_zone(robot_data):
@@ -35,7 +36,7 @@ def move_forward(robot_data, magnitude, silence):
     output and 2 is complete silence where no output is printed"""
 
     Jeff.penup()
-    if track_position(robot_data, int(magnitude)): Jeff.forward(int(magnitude))
+    if track_position(robot_data, magnitude): Jeff.forward(int(magnitude))
 
     return robot_data
 
@@ -80,15 +81,18 @@ def sprint(robot_data, magnitude, silence):
 def track_position(robot_data, magnitude):
     """Calculates and keeps track of the robots position"""
 
+    from robot import obstacles
+
     compass = robot_data['compass']
     temp_x = robot_data.get('x')  #stores the initial position
     temp_y = robot_data.get('y')
+
     if compass[0] % 2 == 1:   #Checks if the direction is 'odd' (along the y-axis)
-        robot_data['y'] += (int(compass[0]) * magnitude)
+        robot_data['y'] += int((compass[0] * magnitude))
 
         if obstacles.is_position_blocked(robot_data['x'], robot_data['y']) == True or\
             obstacles.is_path_blocked(temp_x, temp_y, robot_data['x'], robot_data['y']) == True:   #path checks
-                robot_data['y'] -= (int(compass[0]) * magnitude)
+                robot_data['y'] -= int(compass[0] * magnitude)
                 print(f"> {robot_data['name']}: Sorry, there is an obstacle in the way.")
                 return False
 
@@ -97,7 +101,7 @@ def track_position(robot_data, magnitude):
             robot_data['y'] -= int((compass[0] * magnitude))
             return False
     else:
-        robot_data['x'] += int(float(compass[0] / 2))  * magnitude
+        robot_data['x'] += int(((compass[0] / 2)  * magnitude))
 
         if obstacles.is_position_blocked(robot_data['x'], robot_data['y']) == True or\
             obstacles.is_path_blocked(temp_x, temp_y, robot_data['x'], robot_data['y']) == True:
@@ -128,19 +132,47 @@ def replay_output(robot_data, commands, count):
 
 
 def display_obstacles(obstacle_list):
+    """Uses the turtle to draw the obstacles onto the grid"""
 
-    Jeff.speed(10)
+    Jeff._tracer(0, 0)
     Jeff.penup()
     for i in obstacle_list:
         Jeff.goto(i[0], i[1])
         Jeff.pendown()
         Jeff.begin_fill()
-        Jeff.goto(i[0], i[3])
-        Jeff.goto(i[2], i[3])
-        Jeff.goto(i[2], i[1])
+        Jeff.goto(i[0], i[1] + 4)
+        Jeff.goto(i[0] + 4, i[1] + 4)
+        Jeff.goto(i[0] + 4, i[1])
         Jeff.goto(i[0], i[1])
         Jeff.end_fill()
         Jeff.penup()
     Jeff.penup()
     Jeff.goto(0,0)
+    Jeff._tracer(1, 1)
 
+
+def display_obstacles_2(obstacle_list):
+    """used if obstacle tuples only have 2 coords, used for mazes instead of obstacles"""
+    count = 1
+    Jeff._tracer(0, 0)
+    Jeff.penup
+    for i in obstacle_list:
+        Jeff.goto(i[0], i[1])
+        Jeff.pendown
+        try: j = obstacle_list[count]
+        except IndexError: return
+        Jeff.goto(j[0], j[1])
+        count += 1
+    Jeff.penup()
+    Jeff.goto(0,0)
+    Jeff._tracer(1, 1)
+
+
+def draw_path(maze_path):
+
+    Jeff.penup
+    for i in maze_path:
+        Jeff.goto(i[0], i[1])
+        Jeff.pendown
+    Jeff.penup
+    Jeff.goto(0, 0)

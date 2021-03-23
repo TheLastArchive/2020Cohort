@@ -1,4 +1,4 @@
-from maze import obstacles
+from robot import obstacles
 
 def safe_zone(robot_data):
 
@@ -44,7 +44,7 @@ def turn_left(robot_data, silence):
 def turn_right(robot_data, silence):
 
     compass = robot_data.get('compass')
-    compass.append(compass[0])     #Shifts the entire list backwards.
+    compass.append(compass[0])     #Shifts the entire list to the left.
     compass.pop(0)
     if silence < 2:
         print (" > {} turned right." .format(robot_data['name']))
@@ -125,4 +125,14 @@ def display_obstacles(obstacle_list):
     if obstacles.get_obstacles() != []:
         print("There are some obstacles:")
         for i in obstacle_list:
-            print(f"- At position {i[0]},{i[1]} (to {i[2]},{i[3]})")
+            print(f"- At position {i[0]},{i[1]} (to {int(i[0]) + 4},{int(i[1]) + 4})")
+
+
+def display_obstacles_2(obstacle_list):
+
+    pass
+
+
+def draw_path(maze_path):
+
+    pass
