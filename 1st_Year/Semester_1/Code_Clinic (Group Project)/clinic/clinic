@@ -1,0 +1,175 @@
+#!/usr/bin/env python3       
+#Shebang line to tell the terminal to run this file with python3
+from quickstart import convert_to_RFC_datetime
+import events
+from input_validation import *
+import rich
+from datetime import date, timedelta, datetime
+from sys import argv
+
+
+def event():
+    """Function that receives info and passes it along to the function which gets the Calendar data"""
+
+    if len(argv) > 2:
+        for arg in argv[2:]:
+            if arg.isdigit(): days = int(arg)
+            elif arg == 'personal': pass
+            else: 
+                print(f"Sorry, '{arg}' is not a valid argument, 'events' takes a digit as an optional parameter.")
+                days = get_days()
+    else:
+        days = get_days()
+    #Date to begin the search from
+    startDate = datetime.today()
+    startDate = convert_to_RFC_datetime(year=startDate.year, month=startDate.month, day=startDate.day, hour=startDate.hour, minute=startDate.minute)
+    #Days + 1 otherwise the search stops at midnight
+    endDate = date.today() + timedelta(days=int(days) + 1)
+    endDate = convert_to_RFC_datetime(year=endDate.year, month=endDate.month, day=endDate.day)
+    
+    print("Loading clinic events...")
+    events.get_events(startDate, endDate)
+    if 'personal' in argv:
+        print("Loading personal events...")
+        events.get_personal_events(startDate, endDate)
+
+
+def book():
+    """Takes an event ID and passes it to the API function that adds the user as an attendee"""
+ 
+    event_id = None
+    if len(argv) > 2:
+        event_id = "".join(argv[2:])
+    
+    if event_id is None:
+        event_id = input("Please enter the ID for the event you'd like to attend: ") 
+    try:      
+        events.edit_event(event_id)
+    except:
+        print(f"Sorry could not find the event {event_id}")
+    pass
+
+
+def cancel():
+    """Takes an event ID and passes it to the API function to cancel the event"""
+
+    event_id = None
+    if len(argv) > 2:
+        event_id = "".join(argv[2:])
+    
+    if event_id is None:
+        event_id = input("Please enter the ID for the event you'd like to cancel: ") 
+    try: 
+        events.cancel_event(event_id)
+    except:
+        print(f"Sorry could not find the event {event_id}")
+    pass
+
+
+def volunteer():
+    """Receives the information for the API to create a new event"""
+
+    args = time = input_date = summary = None 
+    
+    if len(argv) > 2:
+        args = " ".join(argv[2:])
+    
+    if args is not None:
+        try:
+            day_index = args.find(" ")
+            if day_index == -1:
+                input_date = args
+            else:
+                input_date = args[:day_index]
+            
+            time_index = args.find(" ", day_index +1)
+            if time_index != -1:
+                time = args[day_index + 1: time_index]
+            else:
+                if day_index != -1: 
+                    time = args[day_index + 1:]
+                
+            if time_index != -1:
+                summary = args[time_index + 1:]
+        except:
+            pass
+
+    input_date = get_date(input_date)
+    time = get_time(time)
+    
+    if summary is None:
+        summary = input("What topics can you assist your fellow students with?: ")
+
+    x = date.today()
+    x = x.year
+
+    start = datetime(year=x, month=int(input_date[1]), day=int(input_date[0]), hour=int(time[0]), minute=int(time[1]))
+    if start < datetime.now():
+        print("Can not create a slot in the past. Please try entering your dates again.")
+    else:    
+        end = start + timedelta(hours=1, minutes=30)
+        start = convert_to_RFC_datetime(year=start.year, month=start.month, day=start.day, hour=int(start.hour) - 2, minute=start.minute)
+        end = convert_to_RFC_datetime(year=end.year, month=end.month, day=end.day, hour=int(end.hour) - 2, minute=end.minute)
+        if free_busy(start, end) is False: return
+
+        print('Creating your slot...')
+        events.create_event(start, end, summary)
+        pass
+
+
+def help_command():
+    """halp plz"""
+
+    rich.print("""
+[white]clinic <command> <paramters>[/white]
+List of all clinic commands:
+
+    [bold cyan]events[/bold cyan]        Retrieves and lists all the events from the calendar for the given days.
+
+                  Parameters: Days(digit)  >  Set how many days worth of events to search for 
+                              'personal'   >  Display your personal calendar's events
+
+    [bold cyan]volunteer[/bold cyan]     Creates an event on the calendar.
+
+                  Parameters: Date         > The date for the event
+                              Time         > The start time for the event
+                              Summary      > The name of the event, keep it concise 
+
+    [bold cyan]book[/bold cyan]          Add yourself to a pre-existing event.
+
+                  Parameters: Event ID     > ID for the event you'd like to attend
+
+    [bold cyan]cancel[/bold cyan]        Remove yourself from an event, the event will be deleted if the volunteer cancels.
+
+                  Parameters: Event ID     > ID for the event you'd like to attend
+
+    [bold cyan]my_events[/bold cyan]     Lists all the events you have created/subscribed to
+
+        
+Parameters are not mandatory, simply call the command for a walkthrough on the necessary information.
+""")
+    pass
+
+
+if __name__ == '__main__':
+
+    arguments = {
+        'volunteer': volunteer,
+        'book': book,
+        'events': event,
+        'cancel': cancel,
+        'help': help_command,
+        'my_events': events.get_user_events
+    }
+
+    if len(argv) == 1: help_command()
+    elif argv[1].lower() in arguments: arguments.get(argv[1])()
+    else: print('invalid command, use <clinic help> for the full list of commands.')
+
+
+#Use < chmod +x clinic > to make the file executable.
+#Make sure the files are in the ~/bin directory < cp clinic ~/bin > so the script can be called from any directory after
+#using the line < export PATH=$PATH":$HOME/bin/clinic" > to point at the bin. This is temporary and will reset with the terminal.
+#use < echo 'export PATH=$PATH":$HOME/bin/clinic"' >> .zshrc > to add the command to the terminal's profile that will run on every startup.
+#If you are using bash, replace .zshrc with .bashrc
+#This setup process will be automated in Iteration 2
